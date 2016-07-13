@@ -7,9 +7,9 @@ module Prpr
             add_label label(:one)
           elsif count >= 2
             unless already_labeled?(label(:over_2))
-              add_comment
               remove_label label(:one)
               add_label label(:over_2)
+              add_comment
             end
           end
         end

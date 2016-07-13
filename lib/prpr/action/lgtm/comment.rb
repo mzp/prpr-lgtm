@@ -44,10 +44,12 @@ module Prpr
         end
 
         def add_label(label)
+          return if already_labeled?(label)
           github.add_labels_to_an_issue(repository, issue_number, [label])
         end
 
         def remove_label(label)
+          return unless already_labeled?(label)
           github.remove_label(repository, issue_number, label)
         end
 

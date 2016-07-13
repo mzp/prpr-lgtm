@@ -1,7 +1,3 @@
 require "prpr/lgtm/version"
-
-module Prpr
-  module Lgtm
-    # Your code goes here...
-  end
-end
+require "prpr/action/lgtm/comment"
+require "prpr/handler/lgtm"

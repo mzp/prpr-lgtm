@@ -49,21 +49,21 @@ module Prpr
         end
 
         def add_comment
-          github.add_comment(repository, issue_number, message)
+          github.add_comment(repository, pull_request_number, message)
         end
 
         def message
-          env.format(:lgtm_body, event.issue.assignee)
+          env.format(:lgtm_body, event.pull_request.assignee)
         end
 
         def add_label(label)
           return if already_labeled?(label)
-          github.add_labels_to_an_issue(repository, issue_number, [label])
+          github.add_labels_to_an_issue(repository, pull_request_number, [label])
         end
 
         def remove_label(label)
           return unless already_labeled?(label)
-          github.remove_label(repository, issue_number, label)
+          github.remove_label(repository, pull_request_number, label)
         end
 
         def already_labeled?(label)
@@ -71,7 +71,7 @@ module Prpr
         end
 
         def labels
-          github.labels_for_issue(repository, issue_number)
+          github.labels_for_issue(repository, pull_request_number)
         end
 
         def label(name)

@@ -17,22 +17,35 @@ module Prpr
         private
 
         def count
-          comments.map(&method(:point)).reduce(:+)
+          last_state.map(&method(:point)).reduce(:+)
         end
 
-        def point(comment)
-          case comment[:body]
-          when /lgtm/i, /:+1:/
+        def last_state
+          last_state = {}
+          reviews.each do|review|
+            if review[:state] != 'COMMENTED'
+              last_state[review[:user][:login]] = review[:state]
+            end
+          end
+          last_state.values
+        end
+
+        def point(state)
+          case state
+          when 'APPROVED'
             1
-          when /:-1:/
+          when 'CHANGES_REQUESTED'
             -1
           else
             0
           end
         end
 
-        def comments
-          @comments ||= github.issue_comments(repository, issue_number)
+        def reviews
+          # FIXME: use offical method
+          @reviews ||=
+            github.get "#{Octokit::Repository.path repository}/pulls/#{pull_request_number}/reviews",
+              accept: 'application/vnd.github.black-cat-preview+json'
         end
 
         def add_comment
@@ -73,8 +86,8 @@ module Prpr
           event.repository.full_name
         end
 
-        def issue_number
-          event.issue.number
+        def pull_request_number
+          event.pull_request.number
         end
 
         def github

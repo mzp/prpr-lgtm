@@ -13,10 +13,6 @@ Add this line to your application's Gemfile:
 gem 'prpr-lgtm'
 ```
 
-## Usage
-
-TODO: Write usage instructions here
-
 ## Env
 
  * LGTM_LABEL_ONE: label name when one approve is added

@@ -17,7 +17,7 @@ module Prpr
         private
 
         def count
-          last_state.map(&method(:point)).reduce(:+)
+          last_state.map(&method(:point)).reduce(0, :+)
         end
 
         def last_state
@@ -44,7 +44,7 @@ module Prpr
         def reviews
           # FIXME: use offical method
           @reviews ||=
-            github.get "#{Octokit::Repository.path repository}/pulls/#{pull_request_number}/reviews",
+            github.get "#{Octokit::Repository.path repository}/pulls/#{pull_request_number}/reviews?per_page=100",
               accept: 'application/vnd.github.black-cat-preview+json'
         end
 

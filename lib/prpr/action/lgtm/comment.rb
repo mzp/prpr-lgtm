@@ -71,7 +71,7 @@ module Prpr
         end
 
         def labels
-          github.labels_for_issue(repository, pull_request_number)
+          event.pull_request.labels
         end
 
         def label(name)

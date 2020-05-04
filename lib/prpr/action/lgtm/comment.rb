@@ -78,10 +78,6 @@ module Prpr
           Config::Env.default[:"lgtm_label_#{name}"] || name.to_s
         end
 
-        def name
-          env[:mention_comment_members] || 'MEMBERS.md'
-        end
-
         def repository
           event.repository.full_name
         end

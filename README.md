@@ -16,7 +16,7 @@ gem 'prpr-lgtm'
 ## Env
 
  * LGTM_LABEL_ONE: label name when one approve is added
- * LlGTM_LABEL_OVER_2: label name two approve is added
+ * LGTM_LABEL_OVER_2: label name two approve is added
  * LGTM_BODY: comment message when two approval is added
 
 ## License
